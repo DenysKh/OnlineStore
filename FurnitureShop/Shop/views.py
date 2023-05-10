@@ -1,19 +1,36 @@
 from django.shortcuts import render, get_object_or_404
 
 from Cart.forms import CartAddProductForm
-from .models import Category, Product
+from .models import Room, Category, Product
 
 
-def product_list(request, category_slug=None):
-    category = None
-    categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
-
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-        products = products.filter(category=category)
+def home(request):
+    rooms = Room.objects.all()
 
     context = {
+        'rooms': rooms,
+    }
+
+    return render(request, 'shop/home.html', context)
+
+
+def product_list(request, room_slug=None, category_slug=None):
+    category = None
+    room = None
+    categories = None
+    products = None
+
+    if room_slug:
+        room = get_object_or_404(Room, slug=room_slug)
+        categories = Category.objects.filter(room=room)
+        products = Product.objects.filter(category__room=room, available=True)
+
+        if category_slug:
+            category = get_object_or_404(Category, slug=category_slug)
+            products = products.filter(category=category)
+
+    context = {
+        'current_room': room,
         'category': category,
         'categories': categories,
         'products': products,

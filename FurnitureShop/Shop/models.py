@@ -3,7 +3,29 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 
+class Room(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True, blank=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Кімната'
+        verbose_name_plural = 'Кімнати'
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_room', args=[self.slug])
+
+
 class Category(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='rooms')
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True, blank=True)
 
@@ -21,7 +43,7 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('shop:product_list_by_category', args=[self.slug])
+        return reverse('shop:product_list_by_category', args=[self.room.slug, self.slug])
 
 
 class Product(models.Model):

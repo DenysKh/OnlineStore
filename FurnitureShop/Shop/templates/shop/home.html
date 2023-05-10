@@ -1,0 +1,19 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    <div id="sidebar">
+        <h3>Rooms</h3>
+        <ul>
+            {% for room in rooms %}
+                <li {% if room.slug == current_room.slug %}class="selected"{% endif %}>
+                    <a href="{{ room.get_absolute_url }}">{{ room.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

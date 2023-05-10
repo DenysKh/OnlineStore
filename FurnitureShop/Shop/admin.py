@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import Category, Product
+from .models import Room, Category, Product
+
+
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
+
+
+admin.site.register(Room, RoomAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
