@@ -1,9 +1,16 @@
 {% extends "shop/base.html" %}
 
-{% block title %}Thank you{% endblock %}
-
 {% block content %}
-    <h1>Thank you</h1>
-    <p>Your order has been successfully completed. Your order number is
-        <strong>{{ order.id }}</strong>.</p>
+<div class="cart-table-area section-padding-100" style="display: flex;justify-content: center;">
+    <div class="col-12 col-lg-4">
+        <div class="cart-summary">
+            <h5>Дякую за замовлення на нашому сайті!</h5>
+            <ul class="summary-table">
+                <p>Ваше замовлення успішно завершено. Номер вашого замовлення <strong>{{ order.id }}</strong>.
+                </p>
+                <p>Наші менеджери незабаром зв'яжуться з вами для детальнішого уточнення деталей вашого замовлення.</p>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

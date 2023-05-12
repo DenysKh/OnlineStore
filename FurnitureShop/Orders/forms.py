@@ -1,8 +1,14 @@
 from django import forms
-from .models import Order
+from .models import Order, OrderPickup
 
 
-class OrderCreateForm(forms.ModelForm):
+class OrderPickupForm(forms.ModelForm):
+    class Meta:
+        model = OrderPickup
+        fields = ['first_name', 'last_name', 'phone_number', ]
+
+
+class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'email', 'address', 'postal_code', 'city']
+        fields = ['first_name', 'last_name', 'address', 'postal_code', 'city', 'phone_number', ]

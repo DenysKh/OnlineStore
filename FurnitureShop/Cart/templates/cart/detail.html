@@ -1,54 +1,69 @@
 {% extends "shop/base.html" %}
 {% load static %}
-{% block title %}
-    Your shopping cart
-{% endblock %}
+
+
 {% block content %}
-    <h1>Your shopping cart</h1>
-    <table class="cart">
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Remove</th>
-            <th>Unit price</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for item in cart %}
-            {% with product=item.product %}
-                <tr>
-                    <td>
-                        <a href="{{ product.get_absolute_url }}">
-                            <img src="
-                                {% if product.image %}
-                                    {{ product.image.url }}
-                                {% else %}
-                                    {% static 'img/no_image.png' %}
-                                {% endif %}">
-                        </a>
-                    </td>
-                    <td>{{ product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td><a href="{% url 'cart:cart_remove' product.id%}">Remove</a></td>
-                    <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
-                </tr>
-            {% endwith %}
-        {% endfor %}
-        <tr class="total">
-            <td>Total</td>
-            <td colspan="4"></td>
-            <td class="num">${{ cart.get_total_price }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <p class="text-right">
-        <a href="{% url 'shop:home' %}" class="button light">Continue shopping</a>
-        <a href="{% url 'orders:order_create' %}" class="button">
-            Checkout
-        </a>
-    </p>
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="cart-title mt-50">
+                    <h2>Кошик для покупок</h2>
+                </div>
+
+                <div class="cart-table clearfix">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Назва</th>
+                            <th>Ціна</th>
+                            <th>Кількість</th>
+                            <th style="background: rgb(245 247 250);">Ціна за одиницю</th>
+                            <th style="background: rgb(245 247 250);"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in cart %}
+                        {% with product=item.product %}
+                        <tr>
+                            <td class="cart_product_img">
+                                <a href="{{ product.get_absolute_url }}"><img
+                                        src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+                                        alt="Product"></a>
+                            </td>
+                            <td class="cart_product_desc"><h5>{{ product.name }}</h5></td>
+                            <td class="price"><span>{{ item.total_price }} UAH</span></td>
+                            <td class="qty">{{ item.quantity }}</td>
+                            <td class="price"><span>{{ item.price }} UAH</span></td>
+                            <td>
+                                <a href="{% url 'cart:cart_remove' product.id%}">
+                                    <div class="qty-btn d-flex">
+                                        <h6>Видалити</h6>
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endwith %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="cart-summary">
+                    <h5>Всього в кошику</h5>
+                    <ul class="summary-table">
+                        <li><span>Проміжний підсумок:</span> <span>{{ cart.get_total_price }} UAH</span></li>
+                        <li><span>Доставка:</span> <span>Безкоштовно</span></li>
+                        <li><span>Загальна сума:</span> <span>{{ cart.get_total_price }} UAH</span></li>
+                    </ul>
+                    <div class="cart-btn mt-100">
+                        <a href="{% url 'orders:order_create' %}" class="btn amado-btn w-100">Оформлення</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,35 +1,231 @@
 {% load static %}
 
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <title>{% block title %}My shop{% endblock %}</title>
-    <link href="{% static 'shop/css/base.css' %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Furniture Store</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{% static 'shop/img/core/favicon.ico' %}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="{% static 'shop/css/core-style.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
+
 </head>
+
 <body>
-<div id="header">
-    <a href="/" class="logo">My shop</a>
-</div>
-<div id="subheader">
-    <div class="cart">
-        {% with total_items=cart|length %}
-            {% if cart|length > 0 %}
-                Your cart:
-                <a href="{% url 'cart:cart_detail' %}">
-                    {{ total_items }} item{{ total_items|pluralize }},
-                    ${{ cart.get_total_price }}
-                </a>
-            {% else %}
-                Your cart is empty.
-            {% endif %}
-        {% endwith %}
+
+<!-- Search Wrapper Area Start -->
+<div class="search-wrapper section-padding-100">
+    <div class="search-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-content">
+                    <form action="#" method="get">
+                        <input type="search" name="search" id="search" placeholder="Введіть ключове слово...">
+                        <button type="submit"><img src="{% static 'shop/img/core/search.png' %}" alt=""></button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div id="content">
+<!-- Search Wrapper Area End -->
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    <!-- Mobile Nav (max width 767px)-->
+    <div class="mobile-nav">
+
+        <!-- Navbar Brand -->
+        <div class="amado-navbar-brand">
+            <a href="{% url 'shop:home' %}"><img src="{% static 'shop/img/core/logo.png' %}" alt=""></a>
+        </div>
+
+        <!-- Navbar Toggler -->
+        <div class="amado-navbar-toggler">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Header Area Start -->
+    <header class="header-area clearfix">
+
+        <!-- Close Icon -->
+        <div class="nav-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+
+        <!-- Logo -->
+        <div class="logo">
+            <a href="{% url 'shop:home' %}"><img src="{% static 'shop/img/core/logo.png' %}" alt=""></a>
+        </div>
+
+        <!-- Amado Nav -->
+        <nav class="amado-nav">
+            <ul>
+                <li class="{% if request.resolver_match.url_name == 'shop:home' %}active{% endif %}"><a
+                        href="{% url 'shop:home' %}">Головна</a></li>
+                <li class="{% if request.resolver_match.url_name == 'shop:products' %}active{% endif %}"><a
+                        href="{% url 'shop:products' %}">Товари</a></li>
+                <li class="{% if request.resolver_match.url_name == 'order:order_create' %}active{% endif %}"><a
+                        href="{% url 'orders:order_create' %}">Оформлення</a></li>
+            </ul>
+        </nav>
+
+        <!-- Button Group -->
+        <div class="amado-btn-group mt-30 mb-100">
+            <a href="#Discount" class="btn amado-btn mb-15">Знижка</a>
+            <a href="{% url 'shop:products' %}" class="btn amado-btn active">Новинки тижня</a>
+        </div>
+
+        <!-- Cart Menu -->
+        <div class="cart-fav-search mb-100">
+            {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+            <a href="{% url 'cart:cart_detail' %}" class="cart-nav"><img src="{% static 'shop/img/core/cart.png' %}"
+                                                                         alt="">
+                Кошик <span>({{ total_items }})</span>
+            </a>
+            {% else %}
+            <a href="{% url 'cart:cart_detail' %}" class="cart-nav"><img src="{% static 'shop/img/core/cart.png' %}"
+                                                                         alt="">
+                Кошик <span>(0)</span>
+            </a>
+            {% endif %}
+            {% endwith %}
+            <a href="#" class="fav-nav"><img src="{% static 'shop/img/core/favorites.png' %}" alt=""> Улюблені</a>
+            <a href="#" class="search-nav"><img src="{% static 'shop/img/core/search.png' %}" alt=""> Пошук</a>
+        </div>
+
+        <!-- Social Button -->
+        <div class="social-info d-flex justify-content-between">
+            <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+
+    </header>
+    <!-- Header Area End -->
+
     {% block content %}
     {% endblock %}
+
 </div>
+<!-- ##### Main Content Wrapper End ##### -->
+
+
+<!-- ##### Newsletter Area Start ##### -->
+<section class="newsletter-area section-padding-100-0" id="Discount">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Newsletter Text -->
+            <div class="col-12 col-lg-6 col-xl-7">
+                <div class="newsletter-text mb-100" style="text-align: justify;">
+                    <h2>Отримайте <span>10% знижки</span> на меблі з підпискою на розсилку!</h2>
+                    <p>
+                        Підпишіться на нашу розсилку та будьте в курсі останніх ексклюзивних пропозицій,
+                        новин та оновлень нашого найкращого вибору високоякісних меблів,
+                        а також отримуйте персоналізовані рекомендації,
+                        адаптовані до вашого унікального стилю та вподобань.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Newsletter Form -->
+            <div class="col-12 col-lg-6 col-xl-5">
+                <div class="newsletter-form mb-100">
+                    <form action="#" method="post">
+                        <input type="email" name="email" class="nl-email" placeholder="Ваша електронна адреса">
+                        <input type="submit" value="Підписатися">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ##### Newsletter Area End ##### -->
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer_area clearfix">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Single Widget Area -->
+            <div class="col-12 col-lg-4">
+                <div class="single_widget_area">
+                    <!-- Copywrite Text -->
+                    <p style="font-size: 20px; letter-spacing: 2px; margin: 0;">Furniture Store</p>
+                    <p class="copywrite" style="margin-top: 0;">
+                        Відкрийте для себе нашу вишукану колекцію меблів |
+                        Купуйте зараз і відчуйте ідеальне поєднання стилю та комфорту
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Single Widget Area -->
+            <div class="col-12 col-lg-8">
+                <div class="single_widget_area">
+
+                    <!-- Footer Menu -->
+                    <div class="footer_menu">
+                        <nav class="navbar navbar-expand-lg justify-content-end">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#footerNavContent" aria-controls="footerNavContent"
+                                    aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="footerNavContent">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{% url 'shop:home' %}">Головна</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'shop:products' %}">Товари</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'orders:order_create' %}">Оформлення</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+<script src="{% static 'shop/js/jquery/jquery-2.2.4.min.js' %}"></script>
+<!-- Popper js -->
+<script src="{% static 'shop/js/popper.min.js' %}"></script>
+<!-- Bootstrap js -->
+<script src="{% static 'shop/js/bootstrap.min.js' %}"></script>
+<!-- Plugins js -->
+<script src="{% static 'shop/js/plugins.js' %}"></script>
+<!-- Active js -->
+<script src="{% static 'shop/js/active.js' %}"></script>
+
 </body>
+
 </html>

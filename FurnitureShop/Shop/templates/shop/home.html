@@ -1,19 +1,27 @@
 {% extends "shop/base.html" %}
 {% load static %}
 
-{% block title %}
-    Home
+{% block content %}
+
+    <!-- Product Catagories Area Start -->
+    <div class="products-catagories-area clearfix">
+        <div class="amado-pro-catagory clearfix">
+            {% for room in rooms %}
+            <!-- Single Catagory -->
+            <div class="single-products-catagory clearfix">
+                <a href="{{ room.get_absolute_url }}">
+                    <img src="{{ room.image.url }}" alt="">
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <h4>{{ room.name }}</h4>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Product Catagories Area End -->
+
 {% endblock %}
 
-{% block content %}
-    <div id="sidebar">
-        <h3>Rooms</h3>
-        <ul>
-            {% for room in rooms %}
-                <li {% if room.slug == current_room.slug %}class="selected"{% endif %}>
-                    <a href="{{ room.get_absolute_url }}">{{ room.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-{% endblock %}

@@ -1,24 +1,171 @@
 {% extends "shop/base.html" %}
 
-{% block title %}Checkout{% endblock %}
-
 {% block content %}
-    <h1>Checkout</h1>
-    <div class="order-info">
-        <h3>Your order</h3>
-        <ul>
-            {% for item in cart %}
-                <li>
-                    {{ item.quantity }}x {{ item.product.name }}
-                    <span>${{ item.total_price }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-        <p>Total: ${{ cart.get_total_price }}</p>
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="checkout_details_area mt-50 clearfix">
+
+                    <div class="cart-title">
+                        <h2>Замовлення</h2>
+                    </div>
+
+                    <div class="cart-table clearfix">
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr style="height: 60px; background: white;">
+                                <th>
+                                    <a href="#" id="btn-form1" class="form-link active">Доставка поштою</a>
+                                </th>
+                                <th>
+                                    <a href="#" id="btn-form2" class="form-link">Самовивіз зі складу</a>
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <form id="form1" action="{% url 'orders:order_create' %}" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="first_name" name="first_name"
+                                       placeholder="Ім'я" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                       placeholder="Фамілія" required>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <input type="text" class="form-control mb-3" id="street_address" name="address"
+                                       placeholder="Адреса" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Місто"
+                                       value="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="zipCode" name="postal_code"
+                                       placeholder="Поштовий індекс" value="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="number" class="form-control" id="phone_number" name="phone_number" min="0"
+                                       placeholder="Телефон" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10"
+                                          placeholder="Залиште коментар про своє замовлення"></textarea>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                        <input type="submit" value="Оформити замовлення" class="btn amado-btn w-100">
+                    </form>
+
+                    <form id="form2" action="{% url 'orders:order_create_pickup' %}" method="post"  style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="first_name_pickup" name="first_name"
+                                       placeholder="Ім'я" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="last_name_pickup" name="last_name"
+                                       placeholder="Фамілія" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <input type="number" class="form-control" id="phone_number_pickup" name="phone_number" min="0"
+                                       placeholder="Телефон" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <textarea name="comment" class="form-control w-100" id="comment_pickup" cols="30" rows="10"
+                                          placeholder="Залиште коментар про своє замовлення"></textarea>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                        <input type="submit" value="Оформити замовлення" class="btn amado-btn w-100">
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="cart-summary">
+                    <h5>Всього в кошику</h5>
+                    <ul class="summary-table">
+                        {% for item in cart %}
+                        <li>
+                            <span>{{ item.quantity }}x {{ item.product.name }}</span>
+                        </li>
+                        {% endfor %}
+                        <p>Загальна сума: ${{ cart.get_total_price }}</p>
+                    </ul>
+
+                    <div class="payment-method">
+                        <!-- Cash on delivery -->
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" checked>
+                            <label class="custom-control-label">Оплата здійснюється накладеним платежем</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <form action="." method="post" class="order-form">
-        {{ form.as_p }}
-        <p><input type="submit" value="Place order"></p>
-        {% csrf_token %}
-    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+        /* Стилі для посилань */
+        .form-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #eaeaea;
+            color: #333;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .form-link.active {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+<script>
+        $(document).ready(function() {
+            // При кліку на посилання "Форма 1"
+            $("#btn-form1").click(function() {
+                $("#form1").show(); // Показати форму 1
+                $("#form2").hide(); // Сховати форму 2
+
+                $(this).addClass("active"); // Додати клас "active" до поточного посилання
+                $("#btn-form2").removeClass("active"); // Видалити клас "active" з посилання "Форма 2"
+            });
+
+            // При кліку на посилання "Форма 2"
+            $("#btn-form2").click(function() {
+                $("#form1").hide(); // Сховати форму 1
+                $("#form2").show(); // Показати форму 2
+
+                $(this).addClass("active"); // Додати клас "active" до поточного посилання
+                $("#btn-form1").removeClass("active"); // Видалити клас "active" з посилання "Форма 1"
+            });
+        });
+    </script>
+
+<script>
+        $(document).ready(function() {
+            // При кліку на посилання "Форма 1"
+            $("#btn-form1").click(function() {
+                $("#form1").show(); // Показати форму 1
+                $("#form2").hide(); // Сховати форму 2
+            });
+
+            // При кліку на посилання "Форма 2"
+            $("#btn-form2").click(function() {
+                $("#form1").hide(); // Сховати форму 1
+                $("#form2").show(); // Показати форму 2
+            });
+        });
+</script>
 {% endblock %}

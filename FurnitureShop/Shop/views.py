@@ -16,6 +16,7 @@ def home(request):
 
 def product_list(request, room_slug=None, category_slug=None):
     category = None
+    rooms = Room.objects.all()
     room = None
     categories = None
     products = None
@@ -28,8 +29,11 @@ def product_list(request, room_slug=None, category_slug=None):
         if category_slug:
             category = get_object_or_404(Category, slug=category_slug)
             products = products.filter(category=category)
+    else:
+        products = Product.objects.all()
 
     context = {
+        'rooms': rooms,
         'current_room': room,
         'category': category,
         'categories': categories,

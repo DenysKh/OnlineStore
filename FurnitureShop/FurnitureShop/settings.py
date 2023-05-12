@@ -79,8 +79,11 @@ WSGI_APPLICATION = 'FurnitureShop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'online-store-db',
+        'USER': 'online-store-user',
+        'PASSWORD': 'user',
+        'PORT': '5433',
     }
 }
 
