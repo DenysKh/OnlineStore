@@ -1355,7 +1355,7 @@ img {
     background-color: #f5f7fa;
     border-radius: 0;
     text-align: center !important;
-    min-width: 100px; }
+    min-width: 140px; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .product-topbar .nice-select {
         min-width: 60px;

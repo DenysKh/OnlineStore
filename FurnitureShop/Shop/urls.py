@@ -8,6 +8,8 @@ app_name = 'shop'
 
 urlpatterns = [
     path('', home, name='home'),
+    path('search/', search, name='search'),
+    path('about/', about, name='about'),
     path('products/', product_list, name='products'),
     path('products/<slug:room_slug>', product_list, name='product_list_by_room'),
     path('products/<slug:room_slug>/<slug:category_slug>', product_list, name='product_list_by_category'),

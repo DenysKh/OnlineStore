@@ -33,8 +33,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="search-content">
-                    <form action="#" method="get">
-                        <input type="search" name="search" id="search" placeholder="Введіть ключове слово...">
+                    <form action="{% url 'shop:search' %}" method="GET">
+                        <input type="search" name="q" id="search" placeholder="Введіть ключове слово..."
+                               value="{{ query }}">
                         <button type="submit"><img src="{% static 'shop/img/core/search.png' %}" alt=""></button>
                     </form>
                 </div>
@@ -107,7 +108,7 @@
             </a>
             {% endif %}
             {% endwith %}
-            <a href="#" class="fav-nav"><img src="{% static 'shop/img/core/favorites.png' %}" alt=""> Улюблені</a>
+            <a href="{% url 'shop:about' %}" class="fav-nav"><img src="{% static 'shop/img/core/info.png' %}" alt=""> Про нас</a>
             <a href="#" class="search-nav"><img src="{% static 'shop/img/core/search.png' %}" alt=""> Пошук</a>
         </div>
 

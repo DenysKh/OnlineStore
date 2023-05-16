@@ -1,0 +1,60 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="amado_product_area section-padding-100" style="max-width: calc(95% - 250px); flex: 0 0 calc(95% - 250px); width: calc(95% - 250px);">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                    <div class="total-products">
+                        <p>Знайдено продуктів: <span>{{ products|length }}</span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <div class="single-product-wrapper">
+
+                            <div class="product-img">
+                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/core/no_image.png' %}{% endif %}">
+                                <img class="hover-img" src="{% static 'shop/core/no_image.png' %}" alt="">
+                            </div>
+
+                            <div class="product-description d-flex align-items-center justify-content-between">
+                                <div class="product-meta-data">
+                                    <div class="line"></div>
+                                    <p class="product-price">{{ product.price }} UAH</p>
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <h6>{{ product.name }}</h6>
+                                    </a>
+                                </div>
+
+                                <div class="ratings-cart text-right">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="cart">
+                                        <a href="{{ product.get_absolute_url }}" data-toggle="tooltip" data-placement="left" title="Додати в кошик">
+                                            <img src="{% static 'shop/img/core/cart.png' %}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Продукти з таким іменем не знайдено.</p>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

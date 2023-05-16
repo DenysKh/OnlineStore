@@ -1,0 +1,208 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="cart-table-area section-padding-100" style="padding-left: 10%;">
+    <div class="container-fluid">
+        <h1>Представництва в містах:</h1>
+
+        <h4>Одеса</h4>
+        <p>м Одеса, вул. Велика Арнаутська, д. 44, оф. 505 (код домофона 502) (Кут Рішельєвській).
+            (048) 757-89-50</p>
+
+        <h4>Київ</h4>
+        <p>м Київ, вулиця Дегтярівська, 53-А, оф. 421 (метро Берестейська)
+            (044) 224-55-41</p>
+
+        <h4>Харків</h4>
+        <p>м Харків, вул. Героїв Сталінгада, 169/1
+            (057)765-00-19</p>
+
+        <h4>Дніпро</h4>
+        <p>м Дніпропетровськ, пр. Гагаріна, 92/21
+            (056) 736-09-58</p>
+
+        <h4>Запоріжжя</h4>
+        <p>г. Запорожье, ул. Крива бухта, 2
+            (061) 214-02-30</p>
+
+        <h4>Полтава</h4>
+        <p>м Полтава, вул. Половка, 68
+            (0532) 69-51-20</p>
+
+        <h1 style="padding-top: 5%">Зворотній зв'язок:</h1>
+        <div id="form-main">
+            <div id="form-div">
+                <form class="form" id="form1">
+
+                    <p class="name">
+                        <input name="name" type="text"
+                               class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
+                               placeholder="Ім'я" id="name"/>
+                    </p>
+
+                    <p class="email">
+                        <input name="email" type="text" class="validate[required,custom[email]] feedback-input"
+                               id="email" placeholder="Електронна адреса"/>
+                    </p>
+
+                    <p class="text">
+                        <textarea name="text" class="validate[required,length[6,300]] feedback-input" id="comment"
+                                  placeholder="Повідомлення"></textarea>
+                    </p>
+
+
+                    <div class="submit">
+                        <input type="submit" value="SEND" id="button-blue"/>
+                        <div class="ease"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+            #feedback-page{
+                text-align:center;
+            }
+
+            .feedback-input {
+                color:#3c3c3c;
+                font-family: Helvetica, Arial, sans-serif;
+              font-weight:500;
+                font-size: 18px;
+                border-radius: 0;
+                line-height: 22px;
+                background-color: #fbfbfb;
+                padding: 13px 13px 13px 54px;
+                margin-bottom: 10px;
+                width:100%;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -ms-box-sizing: border-box;
+                box-sizing: border-box;
+              border: 3px solid rgba(0,0,0,0);
+            }
+
+            .feedback-input:focus{
+                background: #fff;
+                box-shadow: 0;
+                border: 3px solid #3498db;
+                color: #3498db;
+                outline: none;
+              padding: 13px 13px 13px 54px;
+            }
+
+            .focused{
+                color:#30aed6;
+                border:#30aed6 solid 3px;
+            }
+
+            /* Icons ---------------------------------- */
+            #name{
+                background-image: url(http://rexkirby.com/kirbyandson/images/name.svg);
+                background-size: 30px 30px;
+                background-position: 11px 8px;
+                background-repeat: no-repeat;
+            }
+
+            #name:focus{
+                background-image: url(http://rexkirby.com/kirbyandson/images/name.svg);
+                background-size: 30px 30px;
+                background-position: 8px 5px;
+              background-position: 11px 8px;
+                background-repeat: no-repeat;
+            }
+
+            #email{
+                background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
+                background-size: 30px 30px;
+                background-position: 11px 8px;
+                background-repeat: no-repeat;
+            }
+
+            #email:focus{
+                background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
+                background-size: 30px 30px;
+              background-position: 11px 8px;
+                background-repeat: no-repeat;
+            }
+
+            #comment{
+                background-image: url(http://rexkirby.com/kirbyandson/images/comment.svg);
+                background-size: 30px 30px;
+                background-position: 11px 8px;
+                background-repeat: no-repeat;
+            }
+
+            textarea {
+                width: 100%;
+                height: 150px;
+                line-height: 150%;
+                resize:vertical;
+            }
+
+            input:hover, textarea:hover,
+            input:focus, textarea:focus {
+                background-color:white;
+            }
+
+            #button-blue{
+                font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+                float:left;
+                width: 100%;
+                border: #fbfbfb solid 4px;
+                cursor:pointer;
+                background-color: #3498db;
+                color:white;
+                font-size:24px;
+                padding-top:22px;
+                padding-bottom:22px;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+              margin-top:-4px;
+              font-weight:700;
+            }
+
+            #button-blue:hover{
+                background-color: rgba(0,0,0,0);
+                color: #0493bd;
+            }
+
+            .submit:hover {
+                color: #3498db;
+            }
+
+            .ease {
+                width: 0px;
+                height: 74px;
+                background-color: #fbfbfb;
+                -webkit-transition: .3s ease;
+                -moz-transition: .3s ease;
+                -o-transition: .3s ease;
+                -ms-transition: .3s ease;
+                transition: .3s ease;
+            }
+
+            .submit:hover .ease{
+              width:100%;
+              background-color:white;
+            }
+
+            @media only screen and (max-width: 580px) {
+                #form-div{
+                    left: 3%;
+                    margin-right: 3%;
+                    width: 88%;
+                    margin-left: 0;
+                    padding-left: 3%;
+                    padding-right: 3%;
+                }
+            }
+        </style>
+
+    </div>
+</div>
+{% endblock %}

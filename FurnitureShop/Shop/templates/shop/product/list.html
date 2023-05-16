@@ -2,215 +2,193 @@
 {% load static %}
 
 {% block content %}
-    <div class="shop_sidebar_area">
+<div class="shop_sidebar_area">
 
-        <!-- ##### Single Widget ##### -->
-        <div class="widget catagory mb-50">
+    <!-- ##### Single Widget ##### -->
+    <div class="widget catagory mb-50">
 
-            <!-- Widget Title -->
-            <h6 class="widget-title mb-30">Меблі</h6>
-            <!--  Categories  -->
-            {% for room in rooms %}
-                <div class="catagories-menu">
-                    <ul>
-                        <li {% if room.slug == current_room.slug %}class="active"{% endif %}>
-                            <a href="{{ room.get_absolute_url }}">{{ room.name }}</a>
-                        </li>
-                    </ul>
-                </div>
-            {% endfor %}
+        <!-- Widget Title -->
+        <h6 class="widget-title mb-30">Меблі</h6>
+        <!--  Categories  -->
+        {% for room in rooms %}
+        <div class="catagories-menu">
+            <ul>
+                <li {% if current_room and room.slug == current_room.slug %}class="active" {% endif %}>
+                    <a href="{{ room.get_absolute_url }}">{{ room.name }}</a>
+                </li>
+            </ul>
         </div>
-
-        <!-- ##### Single Widget ##### -->
-        <div class="widget catagory mb-50">
-
-            <!-- Widget Title -->
-            <h6 class="widget-title mb-30">Категорії</h6>
-            <!--  Categories  -->
-            {% for c in categories %}
-                <div class="catagories-menu">
-                    <ul>
-                        <li {% if category.slug == c.slug %}class="active"{% endif %}>
-                            <a href="{% url 'shop:product_list_by_category' current_room.slug c.slug %}">{{ c.name }}</a>
-                        </li>
-                    </ul>
-                </div>
-            {% endfor %}
-        </div>
-
-        <!-- ##### Single Widget ##### -->
-        <div class="widget brands mb-50">
-
-                <!-- Widget Title -->
-                <h6 class="widget-title mb-30">Brands</h6>
-
-                <div class="widget-desc">
-                    <!-- Single Form Check -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="amado">
-                        <label class="form-check-label" for="amado">Amado</label>
-                    </div>
-
-                    <!-- Single Form Check -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="ikea">
-                        <label class="form-check-label" for="ikea">Ikea</label>
-                    </div>
-
-                    <!-- Single Form Check -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="furniture">
-                        <label class="form-check-label" for="furniture">Furniture Inc</label>
-                    </div>
-
-                    <!-- Single Form Check -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="factory">
-                        <label class="form-check-label" for="factory">The factory</label>
-                    </div>
-
-                    <!-- Single Form Check -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="artdeco">
-                        <label class="form-check-label" for="artdeco">Artdeco</label>
-                    </div>
-                </div>
-
-            </div>
-
-        <!-- ##### Single Widget ##### -->
-        <div class="widget price mb-50">
-
-                <!-- Widget Title -->
-                <h6 class="widget-title mb-30">Price</h6>
-
-                <div class="widget-desc">
-                    <div class="slider-range">
-                        <div data-min="10" data-max="1000" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1000" data-label-result="">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                        </div>
-                        <div class="range-price">$10 - $1000</div>
-                    </div>
-                </div>
-
-            </div>
-
+        {% endfor %}
     </div>
 
-    <div class="amado_product_area section-padding-100">
-            <div class="container-fluid">
+    <!-- ##### Single Widget ##### -->
+    <div class="widget catagory mb-50">
 
-                <!-- ##### Sorting ##### -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+        <!-- Widget Title -->
+        <h6 class="widget-title mb-30">Категорії</h6>
+        <!--  Categories  -->
+        {% for c in categories %}
+        <div class="catagories-menu">
+            <ul>
+                <li {% if category and c and category.slug == c.slug %}class="active" {% endif %}>
+                    <a href="{% url 'shop:product_list_by_category' current_room.slug c.slug %}">{{ c.name }}</a>
+                </li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
 
-                            <!-- Total Products -->
-                            <div class="total-products">
-                                <p>Показано 1-8 з 25</p>
-                                <div class="view d-flex">
-                                    <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
+</div>
 
-                            <!-- Sorting -->
-                            <div class="product-sorting d-flex">
-                                <div class="sort-by-date d-flex align-items-center mr-15">
-                                    <p>Сортувати за</p>
-                                    <form action="#" method="get">
-                                        <select name="select" id="sortBydate">
-                                            <option value="value">Дата</option>
-                                            <option value="value">Найновіші</option>
-                                            <option value="value">Популярні</option>
-                                        </select>
-                                    </form>
-                                </div>
-                                <div class="view-product d-flex align-items-center">
-                                    <p>Показувати</p>
-                                    <form action="#" method="get">
-                                        <select name="select" id="viewProduct">
-                                            <option value="value">12</option>
-                                            <option value="value">24</option>
-                                            <option value="value">48</option>
-                                            <option value="value">96</option>
-                                        </select>
-                                    </form>
-                                </div>
-                            </div>
+<div class="amado_product_area section-padding-100">
+    <div class="container-fluid">
 
+        <!-- ##### Sorting ##### -->
+        <div class="row">
+            <div class="col-12">
+                <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                    <!-- Total Products -->
+                    <div class="total-products">
+                        <p>Показано {{ products|length }} з {{ total_products }}</p>
+                        <div class="view d-flex">
+                            <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <!-- Sorting -->
+                    <div class="product-sorting d-flex">
+                        <div class="sort-by-date d-flex align-items-center mr-15">
+                            <p>Сортувати за</p>
+                            <form action="" method="get">
+                                <select name="sort_by" id="sortBydate">
+                                    {% if request.GET.sort_by == None %}
+                                    <option value="" selected>Звичайно</option>
+                                    {% else %}
+                                    <option value="">Звичайно</option>
+                                    {% endif %}
+
+                                    {% if request.GET.sort_by == 'newest' %}
+                                    <option value="newest" selected>Найновіші</option>
+                                    {% else %}
+                                    <option value="newest">Найновіші</option>
+                                    {% endif %}
+
+                                    {% if request.GET.sort_by == 'oldest' %}
+                                    <option value="oldest" selected>Найстаріші</option>
+                                    {% else %}
+                                    <option value="oldest">Найстаріші</option>
+                                    {% endif %}
+
+                                    {% if request.GET.sort_by == 'ascending' %}
+                                    <option value="ascending" selected>Зростанням ціни</option>
+                                    {% else %}
+                                    <option value="ascending">Зростанням ціни</option>
+                                    {% endif %}
+
+                                    {% if request.GET.sort_by == 'descending' %}
+                                    <option value="descending" selected>Спаданням ціни</option>
+                                    {% else %}
+                                    <option value="descending">Спаданням ціни</option>
+                                    {% endif %}
+                                </select>
+                                <input type="submit" value="Ок" style="border: none; font-size: 14px; font-weight: 400;
+                                height: 40px; padding-left: 0; line-height: 40px; margin: 0; background-color: #f5f7fa;
+                                border-radius: 0; text-align: center !important; min-width: 40px; margin-left: 5px;">
+                            </form>
                         </div>
                     </div>
                 </div>
-
-                <!-- ##### Posts ##### -->
-                <div class="row">
-                    {% for product in products %}
-                        <!-- Single Product Area -->
-                        <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                            <div class="single-product-wrapper">
-
-                                <!-- Product Image -->
-                                <div class="product-img">
-                                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/core/no_image.png' %}{% endif %}">
-                                    <!-- Hover Thumb -->
-                                    <img class="hover-img" src="{% static 'shop/core/no_image.png' %}" alt="">
-                                </div>
-
-                                <!-- Product Description -->
-                                <div class="product-description d-flex align-items-center justify-content-between">
-                                    <!-- Product Meta Data -->
-                                    <div class="product-meta-data">
-                                        <div class="line"></div>
-                                        <p class="product-price">{{ product.price }} UAH</p>
-                                        <a href="{{ product.get_absolute_url }}">
-                                            <h6>{{ product.name }}</h6>
-                                        </a>
-                                    </div>
-
-                                    <!-- Ratings & Cart -->
-                                    <div class="ratings-cart text-right">
-                                        <div class="ratings">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="cart">
-                                            <a href="{{ product.get_absolute_url }}" data-toggle="tooltip" data-placement="left" title="Додати в кошик">
-                                                <img src="{% static 'shop/img/core/cart.png' %}" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-
-                <!-- ##### Navigation ##### -->
-                <div class="row">
-                    <div class="col-12">
-
-                        <!-- Pagination -->
-                        <nav aria-label="navigation">
-                            <ul class="pagination justify-content-end mt-50">
-                                <li class="page-item active"><a class="page-link" href="#">01.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">04.</a></li>
-                            </ul>
-                        </nav>
-
-                    </div>
-                </div>
-
             </div>
         </div>
+
+        <!-- ##### Posts ##### -->
+        <div class="row">
+            {% for product in products %}
+            <!-- Single Product Area -->
+            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                <div class="single-product-wrapper">
+
+                    <!-- Product Image -->
+                    <div class="product-img">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'shop/img/core/no_image.png' %}{% endif %}">
+                        <!-- Hover Thumb -->
+                        <img class="hover-img" src="{% static 'shop/core/no_image.png' %}" alt="">
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="product-description d-flex align-items-center justify-content-between">
+                        <!-- Product Meta Data -->
+                        <div class="product-meta-data">
+                            <div class="line"></div>
+                            <p class="product-price">{{ product.price }} UAH</p>
+                            <a href="{{ product.get_absolute_url }}">
+                                <h6>{{ product.name }}</h6>
+                            </a>
+                        </div>
+
+                        <!-- Ratings & Cart -->
+                        <div class="ratings-cart text-right">
+                            <div class="ratings">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div class="cart">
+                                <a href="{{ product.get_absolute_url }}" data-toggle="tooltip" data-placement="left"
+                                   title="Додати в кошик">
+                                    <img src="{% static 'shop/img/core/cart.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- ##### Navigation ##### -->
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Pagination -->
+                <nav aria-label="navigation">
+                    <ul class="pagination justify-content-end mt-50">
+                        {% if products.has_previous %}
+                            {% if products.number > 3 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ products.number|add:'-1' }}">
+                                    {{ products.number|add:'-1' }}</a></li>
+                            {% endif %}
+                            {% if products.number > 2 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ products.number|add:'-2' }}">
+                                    {{ products.number|add:'-2' }}</a></li>
+                            {% endif %}
+                            <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">
+                                {{ products.previous_page_number }}</a></li>
+                        {% endif %}
+
+                        <li class="page-item active"><a class="page-link" href="#">{{ products.number }}</a></li>
+
+                        {% if products.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">
+                                {{ products.next_page_number }}</a></li>
+                            {% if products.paginator.num_pages > products.number|add:2 %}
+                                <li class="page-item"><a class="page-link" href="?page={{ products.number|add:2 }}">
+                                    {{ products.number|add:2 }}</a></li>
+                            {% endif %}
+                            {% if products.paginator.num_pages > products.number|add:1 %}
+                                <li class="page-item"><span class="page-link">...</span></li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}
 
 
