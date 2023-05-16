@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)r&t-eh2f1hu0sx)s=!2ir2m@g&9^!8n&^^=g6_xlytxe$ge50'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -81,10 +81,11 @@ WSGI_APPLICATION = 'FurnitureShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'online-store-db',
-        'USER': 'online-store-user',
-        'PASSWORD': 'user',
-        'PORT': '5433',
+        'NAME': 'szorqzfx',
+        'USER': 'szorqzfx',
+        'PASSWORD': 'ZT6W5u792Qle0oGNzoqDzPLerbuWY5GY',
+        'HOST': 'dumbo.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
 
