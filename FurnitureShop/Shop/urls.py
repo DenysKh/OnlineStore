@@ -14,7 +14,7 @@ urlpatterns = [
     path('products/<slug:room_slug>', product_list, name='product_list_by_room'),
     path('products/<slug:room_slug>/<slug:category_slug>', product_list, name='product_list_by_category'),
     path('product_detail/<int:id>/<slug:slug>', product_detail, name='product_detail'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
